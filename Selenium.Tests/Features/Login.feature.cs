@@ -87,10 +87,12 @@ namespace Selenium.Tests.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Register Successfully")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Register & Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Registration")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Selenium")]
         public virtual void RegisterSuccessfully()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Successfully", new string[] {
-                        "Registration"});
+                        "Registration",
+                        "Selenium"});
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -111,10 +113,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Login Successfully")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Register & Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Selenium")]
         public virtual void LoginSuccessfully()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login Successfully", new string[] {
-                        "Login"});
+                        "Login",
+                        "Selenium"});
 #line 14
 this.ScenarioSetup(scenarioInfo);
 #line 15

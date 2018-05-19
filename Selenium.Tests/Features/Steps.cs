@@ -6,24 +6,31 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using log4net;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Selenium.Tests.Features
 {
     [Binding]
     public class Steps
     {
+        #region Properties
         private RegistrationPage register { get; set; }
         private string RegisteredUsername { get { return "johnsmithf10d51c2-92f9-47a7-9395-1661ca13e218"; } }
         private string RegisteredPassword { get { return "Test1234"; } }
         private string Directory { get; set; }
         private LoginPage login { get; set; }
         private HomePage home { get; set; }
+        private Client Client { get; set; }
+        private List<API> ActualResults { get; set; }
+        private List<API> ExpectedResults { get; set; }
         private string username { get; set; }
         private string password { get; set; }
         private IWebDriver driver { get; set; }
-
         static protected ILog logger = LogManager.GetLogger("TestLog");
+        #endregion
 
+        #region Screenshot
         private void GetScreesnhot()
         {
             var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
@@ -35,10 +42,14 @@ namespace Selenium.Tests.Features
                 bw.Close();
             }
         }
+        #endregion
+
+        #region Test Setup
         /// <summary>
         /// Create Chrome Driver Instance
         /// </summary>
         /// <returns>IWebDriver</returns>
+        [Scope(Tag = "Selenium")]
         [BeforeScenario]
         public IWebDriver BeforeScenario()
         {
@@ -52,13 +63,15 @@ namespace Selenium.Tests.Features
             driver.Manage().Cookies.DeleteAllCookies();
             return driver;
         }
+        #endregion
+
+        #region Test Cleanup
         /// <summary>
         /// Driver cleanup after each scenario
         /// </summary>
         [AfterScenario]
         public void AfterScenario()
         {
-            GetScreesnhot();
             if (ScenarioContext.Current.ScenarioExecutionStatus == ScenarioExecutionStatus.TestError)
             {
                 logger.Error(ScenarioContext.Current.ScenarioInfo.Title);
@@ -68,11 +81,15 @@ namespace Selenium.Tests.Features
                 logger.Error(ScenarioContext.Current.StepContext);
             }
             logger.Debug($"{ScenarioContext.Current.ScenarioInfo.Title}, {ScenarioContext.Current.ScenarioExecutionStatus}");
-            driver.Quit();
+            if (ScenarioContext.Current.ScenarioInfo.Tags.Equals("Login") || ScenarioContext.Current.ScenarioInfo.Tags.Equals("Registration"))
+            {
+                GetScreesnhot();
+                driver.Quit();
+            }
         }
-        /// <summary>
-        /// Steps Bindings
-        /// </summary>
+        #endregion
+
+        #region Given Bindings
         [Given(@"I navigate to the registration page")]
         public void GivenINavigateToRegistrationPage()
         {
@@ -109,6 +126,15 @@ namespace Selenium.Tests.Features
             login.Password.SendKeys(RegisteredPassword);
             GetScreesnhot();
         }
+        [Given(@"I request the public API")]
+        public void GivenIFetchPublicAPI()
+        {
+            Client = new Client();
+            ActualResults = Client.GetAPIRequest();
+        }
+        #endregion
+
+        #region When Bindings
         [When(@"I press register button")]
         public void WhenIPressRegister()
         {
@@ -123,6 +149,14 @@ namespace Selenium.Tests.Features
             login.Login.Click();
             GetScreesnhot();
         }
+        [When(@"I compare the results")]
+        public void WhenICompareAPIResults()
+        {
+            ExpectedResults = Client.GetAPIRequest();
+        }
+        #endregion
+
+        #region Then Bindings
         [Then(@"my registration should be successful")]
         public void ThenRegistrationSuccess()
         {
@@ -140,5 +174,17 @@ namespace Selenium.Tests.Features
             Assert.IsTrue(DriverExtensions.FindElement(driver, By.XPath("//h1[text()='My account']"), 10).Displayed);
             GetScreesnhot();
         }
+        [Then(@"they should be as expected")]
+        public void ThenAPIResultsShouldBeAsExpected()
+        {
+            foreach (var pair in ActualResults.Zip(ExpectedResults, Tuple.Create))
+            {
+                Assert.AreEqual(pair.Item1.UserId, pair.Item2.UserId);
+                Assert.AreEqual(pair.Item1.Id, pair.Item2.Id);
+                Assert.AreEqual(pair.Item1.Title, pair.Item2.Title);
+                Assert.AreEqual(pair.Item1.Body, pair.Item2.Body);
+            }
+        }
+        #endregion
     }
 }

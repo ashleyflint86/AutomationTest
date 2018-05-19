@@ -2,7 +2,7 @@
 	I can successfully register on https://www.nopcommerce.com,
 	And can then login in successfully
 
-@Registration
+@Registration @Selenium
 Scenario: Register Successfully
 	Given I navigate to the registration page
 	And I enter my details
@@ -10,7 +10,7 @@ Scenario: Register Successfully
 	Then my registration should be successful
 	And I should be logged in
 
-@Login
+@Login @Selenium
 Scenario: Login Successfully
 	Given I navigate to the login page
 	And I enter my login details
