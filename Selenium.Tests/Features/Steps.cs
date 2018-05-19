@@ -89,7 +89,6 @@ namespace Selenium.Tests.Features
             logger.Debug($"{ScenarioContext.Current.ScenarioInfo.Title}, {ScenarioContext.Current.ScenarioExecutionStatus}");
             GetScreesnhot();
             driver.Quit();
-            System.Diagnostics.Process.Start($"{Directory}reports.bat");
         }
         [Scope(Tag = "API")]
         [AfterScenario]
@@ -100,7 +99,6 @@ namespace Selenium.Tests.Features
                 TestErrorLog();
             }
             logger.Debug($"{ScenarioContext.Current.ScenarioInfo.Title}, {ScenarioContext.Current.ScenarioExecutionStatus}");
-            System.Diagnostics.Process.Start($"{Directory}\\reports.bat");
         }
         #endregion
 
