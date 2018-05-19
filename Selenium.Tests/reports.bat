@@ -1,0 +1,2 @@
+..\..\..\packages\SpecFlow.2.3.2\tools\specflow.exe stepdefinitionreport ..\..\Selenium.Tests.csproj /out:..\..\StepDefinitionReport.html
+..\..\..\packages\SpecFlow.2.3.2\tools\specflow.exe mstestexecutionreport ..\..\Selenium.Tests.csproj /out:..\..\TestResult.html /testResult:..\..\TestResult.trx

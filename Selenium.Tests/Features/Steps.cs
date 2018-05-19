@@ -18,7 +18,7 @@ namespace Selenium.Tests.Features
         private RegistrationPage register { get; set; }
         private string RegisteredUsername { get { return "johnsmithf10d51c2-92f9-47a7-9395-1661ca13e218"; } }
         private string RegisteredPassword { get { return "Test1234"; } }
-        private string Directory { get; set; }
+        private string Directory { get { return AppDomain.CurrentDomain.BaseDirectory; } }
         private LoginPage login { get; set; }
         private HomePage home { get; set; }
         private Client Client { get; set; }
@@ -63,7 +63,6 @@ namespace Selenium.Tests.Features
         public IWebDriver BeforeScenario()
         {
             Environment.SetEnvironmentVariable("chrome", "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
-            Directory = AppDomain.CurrentDomain.BaseDirectory;
             ChromeOptions options = new ChromeOptions();
             options.AcceptInsecureCertificates = true;
             options.AddArgument("--start-maximized");
@@ -90,6 +89,7 @@ namespace Selenium.Tests.Features
             logger.Debug($"{ScenarioContext.Current.ScenarioInfo.Title}, {ScenarioContext.Current.ScenarioExecutionStatus}");
             GetScreesnhot();
             driver.Quit();
+            System.Diagnostics.Process.Start($"{Directory}reports.bat");
         }
         [Scope(Tag = "API")]
         [AfterScenario]
@@ -100,6 +100,7 @@ namespace Selenium.Tests.Features
                 TestErrorLog();
             }
             logger.Debug($"{ScenarioContext.Current.ScenarioInfo.Title}, {ScenarioContext.Current.ScenarioExecutionStatus}");
+            System.Diagnostics.Process.Start($"{Directory}\\reports.bat");
         }
         #endregion
 

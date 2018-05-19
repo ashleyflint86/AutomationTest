@@ -81,7 +81,6 @@ namespace Selenium.Tests.Features
         {
             testRunner.CollectScenarioErrors();
         }
-        
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Verify Public API")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "API")]
