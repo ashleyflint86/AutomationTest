@@ -44,6 +44,15 @@ namespace Selenium.Tests.Features
         }
         #endregion
 
+        private void TestErrorLog()
+        {
+            logger.Error(ScenarioContext.Current.ScenarioInfo.Title);
+            logger.Error(ScenarioContext.Current.TestError.Message);
+            logger.Error(ScenarioContext.Current.TestError.Source);
+            logger.Error(ScenarioContext.Current.TestError.StackTrace);
+            logger.Error(ScenarioContext.Current.StepContext);
+        }
+
         #region Test Setup
         /// <summary>
         /// Create Chrome Driver Instance
@@ -69,23 +78,28 @@ namespace Selenium.Tests.Features
         /// <summary>
         /// Driver cleanup after each scenario
         /// </summary>
+        [Scope(Tag = "Selenium")]
         [AfterScenario]
-        public void AfterScenario()
+        public void AfterSeleniumScenario()
+        {
+            GetScreesnhot();
+            if (ScenarioContext.Current.ScenarioExecutionStatus == ScenarioExecutionStatus.TestError)
+            {
+                TestErrorLog();
+            }
+            logger.Debug($"{ScenarioContext.Current.ScenarioInfo.Title}, {ScenarioContext.Current.ScenarioExecutionStatus}");
+            GetScreesnhot();
+            driver.Quit();
+        }
+        [Scope(Tag = "API")]
+        [AfterScenario]
+        public void AfterAPIScenario()
         {
             if (ScenarioContext.Current.ScenarioExecutionStatus == ScenarioExecutionStatus.TestError)
             {
-                logger.Error(ScenarioContext.Current.ScenarioInfo.Title);
-                logger.Error(ScenarioContext.Current.TestError.Message);
-                logger.Error(ScenarioContext.Current.TestError.Source);
-                logger.Error(ScenarioContext.Current.TestError.StackTrace);
-                logger.Error(ScenarioContext.Current.StepContext);
+                TestErrorLog();
             }
             logger.Debug($"{ScenarioContext.Current.ScenarioInfo.Title}, {ScenarioContext.Current.ScenarioExecutionStatus}");
-            if (ScenarioContext.Current.ScenarioInfo.Tags.Equals("Login") || ScenarioContext.Current.ScenarioInfo.Tags.Equals("Registration"))
-            {
-                GetScreesnhot();
-                driver.Quit();
-            }
         }
         #endregion
 
