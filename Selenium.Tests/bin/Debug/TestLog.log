@@ -1,0 +1,34 @@
+DEBUG 2018-05-19 16:14:15,610   282ms TestLog                BeforeScenario     - Hello
+DEBUG 2018-05-19 16:16:17,455   245ms TestLog                BeforeScenario     - Hello
+DEBUG 2018-05-19 16:37:34,587   198ms TestLog                BeforeScenario     - TechTalk.SpecFlow.ScenarioInfo
+DEBUG 2018-05-19 16:37:34,622   233ms TestLog                BeforeScenario     - BoDi.IObjectContainer -> <self>
+TechTalk.SpecFlow.ScenarioInfo -> Instance: TechTalk.SpecFlow.ScenarioInfo
+TechTalk.SpecFlow.ScenarioContext -> Type: TechTalk.SpecFlow.ScenarioContext
+Selenium.Tests.Features.Steps -> Type: Selenium.Tests.Features.Steps
+DEBUG 2018-05-19 16:37:52,249 17859ms TestLog                ToRegistrationPage - {}
+DEBUG 2018-05-19 16:38:02,646 28257ms TestLog                AfterScenario      - OK
+DEBUG 2018-05-19 16:41:28,208 15171ms TestLog                ToRegistrationPage - {}
+DEBUG 2018-05-19 16:41:36,454 23416ms TestLog                AfterScenario      - Register & Login Successfully, OK
+DEBUG 2018-05-19 17:03:14,329 19109ms TestLog                ToRegistrationPage - {}
+DEBUG 2018-05-19 17:07:12,034 17343ms TestLog                ToRegistrationPage - {}
+DEBUG 2018-05-19 17:07:25,345 30654ms TestLog                AfterScenario      - Register & Login Successfully, OK
+DEBUG 2018-05-19 17:09:49,037 24206ms TestLog                ToRegistrationPage - {}
+DEBUG 2018-05-19 17:10:07,893 43062ms TestLog                AfterScenario      - Register & Login Successfully, OK
+DEBUG 2018-05-19 17:12:26,465 24126ms TestLog                ToRegistrationPage - {}
+DEBUG 2018-05-19 17:20:29,210 39421ms TestLog                AfterScenario      - Register & Login Successfully, OK
+ERROR 2018-05-19 17:28:18,160 24867ms TestLog                AfterScenario      - Login Successfully
+ERROR 2018-05-19 17:28:18,187 24894ms TestLog                AfterScenario      - Object reference not set to an instance of an object.
+ERROR 2018-05-19 17:28:18,187 24894ms TestLog                AfterScenario      - TechTalk.SpecFlow
+ERROR 2018-05-19 17:28:18,187 24894ms TestLog                AfterScenario      -    at Selenium.Tests.Features.Steps.ThenShouldBeLoggedIn() in C:\Users\Ashley\Desktop\AutomationTrial\Selenium.Tests\Selenium.Tests\Features\Steps.cs:line 136
+   at lambda_method(Closure , IContextManager )
+   at TechTalk.SpecFlow.Bindings.BindingInvoker.InvokeBinding(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, TimeSpan& duration)
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.ExecuteStepMatch(BindingMatch match, Object[] arguments)
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.ExecuteStep(IContextManager contextManager, StepInstance stepInstance)
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.OnAfterLastStep()
+   at TechTalk.SpecFlow.TestRunner.CollectScenarioErrors()
+   at Selenium.Tests.Features.RegisterLoginFeature.ScenarioCleanup()
+   at Selenium.Tests.Features.RegisterLoginFeature.LoginSuccessfully() in C:\Users\Ashley\Desktop\AutomationTrial\Selenium.Tests\Selenium.Tests\Features\Login.feature:line 18
+ERROR 2018-05-19 17:28:18,188 24895ms TestLog                AfterScenario      - 
+DEBUG 2018-05-19 17:28:18,188 24895ms TestLog                AfterScenario      - Login Successfully, TestError
+DEBUG 2018-05-19 17:34:32,853 26855ms TestLog                AfterScenario      - Login Successfully, OK
+DEBUG 2018-05-19 17:35:09,711 27225ms TestLog                AfterScenario      - Register Successfully, OK
