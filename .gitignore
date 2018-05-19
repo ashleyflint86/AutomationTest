@@ -1,2 +1,5 @@
 **/bin/Debug/
 **/bin/Release/
+packages
+TestResults
+.vs
